@@ -1,0 +1,230 @@
+:root {
+    --primary: #a29bfe;
+    --primary-glow: rgba(162, 155, 254, 0.4);
+    --col-items: #00b894;
+    --col-weapons: #ff7675;
+    --col-cars: #0984e3;
+    --bg-dark: #0f0f13;
+    --card-bg: #1a1a20;
+}
+
+body {
+    display: none;
+    height: 100vh;
+    background: radial-gradient(circle at center, rgba(30, 30, 45, 0.4) 0%, rgba(0,0,0,0.8) 100%);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #eee;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: 0.5s ease;
+    margin: 0;
+}
+
+body.visible { opacity: 1; display: flex; }
+
+.shop-wrapper {
+    width: 950px;
+    background: var(--bg-dark);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 30px;
+    display: flex;
+    height: 650px;
+    overflow: hidden;
+    box-shadow: 0 50px 100px rgba(0,0,0,0.8);
+}
+
+/* Sidebar */
+.sidebar {
+    width: 240px;
+    background: rgba(255,255,255,0.02);
+    border-right: 1px solid rgba(255,255,255,0.05);
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.brand {
+    font-weight: 800; font-size: 1.4rem; color: #a29bfe;
+    margin-bottom: 50px; text-align: center; letter-spacing: 2px; text-transform: uppercase;
+}
+
+.nav-link {
+    padding: 15px 20px; margin-bottom: 10px; border-radius: 15px; cursor: pointer; transition: 0.3s;
+    display: flex; align-items: center; color: #666; font-weight: 600; text-decoration: none !important;
+}
+
+.nav-link i { width: 30px; font-size: 1.1rem; }
+.nav-link:hover { color: #fff; background: rgba(255,255,255,0.05); }
+.nav-link.active { background: #a29bfe; color: #111; box-shadow: 0 10px 20px rgba(162, 155, 254, 0.4); }
+
+/* Hauptlayout */
+.main-content {
+    flex: 1; padding: 40px; display: flex; flex-direction: column;
+    background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, transparent 100%);
+}
+
+.content-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+
+/* Grids */
+.item-grid {
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 20px;
+    overflow-y: auto; 
+    padding-right: 10px; 
+    flex-grow: 1;
+    align-items: start; 
+}
+
+.item-grid::-webkit-scrollbar { width: 4px; }
+.item-grid::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+
+/* Item Felder */
+.item-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: 0.3s;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.item-card:hover { 
+    border-color: var(--dynamic-col); 
+    transform: translateY(-5px); 
+    background: #202028;
+    box-shadow: 0 10px 30px -10px var(--dynamic-glow);
+    z-index: 10;
+}
+
+.item-icon-box {
+    width: 50px; height: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 5px;
+    transition: 0.3s;
+    flex-shrink: 0; 
+}
+
+.item-card:hover .item-icon-box { background: var(--dynamic-col); color: #000; }
+.item-icon-box i { color: var(--dynamic-col); font-size: 1.4rem; transition: 0.3s; }
+.item-card:hover .item-icon-box i { color: #000; }
+.item-price { color: var(--dynamic-col); font-weight: 800; font-size: 1.1rem; }
+
+/* Buttons & Inputs */
+.btn-buy {
+    background: var(--dynamic-col); color: #000;
+    border: none; padding: 10px 18px;
+    border-radius: 12px; font-weight: 700;
+    font-size: 0.75rem; text-transform: uppercase;
+    transition: 0.2s;
+    width: 100%; 
+    cursor: pointer;
+}
+
+.btn-buy:hover { transform: scale(1.02); box-shadow: 0 5px 15px var(--dynamic-glow); filter: brightness(1.1); }
+
+.btn-remove {
+    background: rgba(255,50,50,0.1); color: #ff5555;
+    border: 1px solid rgba(255,50,50,0.2); padding: 8px 12px;
+    border-radius: 10px; transition: 0.2s; cursor: pointer;
+}
+.btn-remove:hover { background: rgba(255,50,50,0.3); color: #fff; }
+
+.car-stats { 
+    margin-top: 10px; padding-top: 15px; 
+    border-top: 1px solid rgba(255,255,255,0.05); flex-grow: 1; 
+}
+.stat-label { font-size: 0.65rem; color: #777; margin-bottom: 4px; text-transform: uppercase; }
+.stat-bar { height: 4px; background: rgba(255,255,255,0.05); border-radius: 2px; overflow: hidden; }
+.stat-fill { background: var(--dynamic-col); height: 100%; width: 0; transition: 1s ease-out; }
+
+.footer-bar {
+    margin-top: 20px; 
+    background: rgba(255,255,255,0.02);
+    padding: 20px; 
+    border-radius: 20px;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    gap: 30px; 
+}
+
+/* Modals */
+#plate-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.85); backdrop-filter: blur(10px);
+    z-index: 1000; justify-content: center; align-items: center;
+}
+
+.checkout-modal {
+    background: var(--bg-dark); width: 400px;
+    padding: 40px; border-radius: 30px;
+    border: 1px solid #a29bfe; text-align: center;
+}
+
+input {
+    background: rgba(255,255,255,0.05) !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    color: #fff !important; border-radius: 12px !important;
+    margin-bottom: 20px; text-align: center;
+}
+
+::placeholder { color: rgba(255, 255, 255, 0.6) !important; opacity: 1; }
+.text-muted { 
+    color: rgba(255, 255, 255, 0.65) !important; 
+    font-weight: 500;
+}
+
+/* Checkbox */
+.claim-checkbox {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 28px; 
+    height: 28px; 
+    border-radius: 50%; 
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 2px solid #555; 
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: grid;
+    place-content: center;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.claim-checkbox:hover {
+    border-color: #888;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.claim-checkbox:checked {
+    background-color: #00b894 !important;
+    border-color: #00b894 !important;
+    box-shadow: 0 0 10px rgba(0, 184, 148, 0.5);
+}
+
+.claim-checkbox::before {
+    content: "\f00c"; 
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 14px;
+    color: #fff;
+    transform: scale(0);
+    transition: 0.2s transform ease-in-out;
+}
+
+.claim-checkbox:checked::before {
+    transform: scale(1);
+}
+
+.claim-checkbox:focus {
+    outline: none;
+    box-shadow: none;
+}
